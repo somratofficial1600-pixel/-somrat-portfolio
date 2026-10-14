@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adnan Shah Somrat | Portfolio and Study Hub</title>
+<meta name="description" content="Portfolio, notes hub, CGPA calculator and programming roadmap of Adnan Shah Somrat">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e2a47;--bg2:#0a2038;--line:rgba(130,190,255,.13);--paper:#f3f6fa;--muted:#a9c3de;--hl:#ffd84d;--cy:#6fd3ff;--ink:#08182b;--ok:#7be0a4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{margin:0;background:var(--bg);color:var(--paper);font:400 17px/1.65 "IBM Plex Sans",system-ui,sans-serif;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:32px 32px}
+a{color:var(--cy)}
+:focus-visible{outline:2px solid var(--hl);outline-offset:2px}
+nav{position:sticky;top:0;z-index:5;background:var(--bg2);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px 12px}
+nav a{color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:4px;white-space:nowrap;font-weight:500}
+nav a:hover{color:var(--paper);background:rgba(255,255,255,.07)}
+nav a.on{background:var(--hl);color:var(--ink)}
+main{max-width:860px;margin:0 auto;padding:0 18px}
+section{padding:48px 0 24px}
+h1,h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;margin:0;line-height:1.1}
+h1{font-size:clamp(3rem,13vw,5.6rem);letter-spacing:-.01em}
+h2{font-size:2.3rem;display:flex;align-items:center;gap:14px;margin-bottom:6px}
+h2::after{content:"";flex:1;border-top:1px dashed var(--muted);opacity:.5}
+.sub{color:var(--muted);margin:0 0 22px}
+.hero p{margin:14px 0 0;color:var(--muted);max-width:34em}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.links a{border:1px solid var(--muted);border-radius:4px;padding:5px 14px;color:var(--paper);text-decoration:none}
+.links a:hover{border-color:var(--hl);color:var(--hl)}
+.term{margin-top:26px;background:#06121f;border:1px solid rgba(111,211,255,.4);border-radius:6px;font:14px/1.6 "JetBrains Mono",ui-monospace,monospace}
+.term .bar{padding:8px 14px;border-bottom:1px solid rgba(111,211,255,.25);color:var(--muted)}
+#out{height:250px;overflow-y:auto;padding:12px 14px;white-space:pre-wrap}
+#out .cmd{color:var(--hl)}
+#out .err{color:#ff9d9d}
+.term form{display:flex;gap:8px;padding:0 14px 12px;align-items:center}
+.term form span{color:var(--hl)}
+#cmd{flex:1;min-width:0;background:transparent;border:0;border-bottom:1px solid rgba(111,211,255,.3);color:var(--paper);font:inherit;padding:6px 0}
+.quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 14px}
+button,select,input{font:inherit}
+.quick button,.chip,.btn{background:transparent;color:var(--paper);border:1px solid var(--muted);border-radius:4px;padding:5px 12px;cursor:pointer}
+.quick button:hover,.chip:hover,.btn:hover{border-color:var(--hl);color:var(--hl)}
+.chip.on{background:var(--hl);border-color:var(--hl);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.search,.f input,.f select{background:var(--bg2);color:var(--paper);border:1px solid var(--muted);border-radius:4px;padding:8px 10px;width:100%}
+.search{margin-bottom:8px}
+#list a{display:flex;justify-content:space-between;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);color:var(--paper);text-decoration:none}
+#list a:hover{background:rgba(255,255,255,.05)}
+#list small{color:var(--cy);white-space:nowrap;font-size:.9rem}
+.empty{color:var(--muted);padding:14px 4px}
+.f{display:grid;grid-template-columns:1fr 78px 110px 34px;gap:8px;margin-bottom:8px}
+.f .x{background:none;border:0;color:var(--muted);cursor:pointer;font-size:1.3rem}
+.res{margin:20px 0 6px;padding:16px 18px;border:1px solid var(--hl);border-radius:4px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.res b{font:400 3rem/1 "Instrument Serif",serif;color:var(--hl)}
+.note{color:var(--muted);font-size:.9rem}
+.bar2{height:10px;background:var(--bg2);border:1px solid var(--muted);border-radius:6px;overflow:hidden;margin:6px 0 24px}
+.bar2 div{height:100%;width:0;background:var(--ok);transition:width .3s}
+.ph h3{font-size:1.1rem;margin:18px 0 4px;color:var(--hl);font-weight:600}
+.ph label{display:flex;gap:10px;padding:5px 0;cursor:pointer}
+.ph input{accent-color:var(--ok);width:18px;height:18px;margin-top:5px}
+.ph .done span{color:var(--muted);text-decoration:line-through}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 18px 40px;text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:560px){.f{grid-template-columns:1fr 1fr 34px}.f input:first-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar2 div{transition:none}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#home" class="on">Home</a><a href="#notes">Notes Hub</a><a href="#cgpa">CGPA</a><a href="#roadmap">Roadmap</a>
+</nav>
+<main>
+<section id="home" class="hero">
+  <h1>Adnan Shah Somrat</h1>
+  <p>Diploma in Computer Science and Technology, 1st semester<br>Brahmanbaria Government Polytechnic Institute</p>
+  <div class="links" id="links"></div>
+  <div class="term">
+    <div class="bar">somrat@polytechnic:~</div>
+    <div id="out" aria-live="polite"></div>
+    <form id="tf"><span>$</span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a command" placeholder="Type help and press Enter"></form>
+    <div class="quick" id="quick"></div>
+  </div>
+</section>
+
+<section id="notes">
+  <h2>Notes Hub</h2>
+  <p class="sub">Pick a semester or search by title.</p>
+  <div class="chips" id="chips"></div>
+  <input class="search" id="q" type="search" placeholder="Search notes" aria-label="Search notes">
+  <div id="list"></div>
+</section>
+
+<section id="cgpa">
+  <h2>CGPA Calculator</h2>
+  <p class="sub">Enter each subject's credit and grade to see your CGPA instantly.</p>
+  <div id="rows"></div>
+  <button class="btn" id="add" type="button">Add subject</button>
+  <div class="res"><span>Total credits: <span id="tc">0</span></span><b id="cg">0.00</b></div>
+  <p class="note">Calculated on a 4.00 scale. Official results follow the board's rules.</p>
+</section>
+
+<section id="roadmap">
+  <h2>Programming Roadmap</h2>
+  <p class="sub">Tick items as you finish them. Your progress is saved in this browser.</p>
+  <div><b id="pct">0%</b> complete</div>
+  <div class="bar2"><div id="fill"></div></div>
+  <div id="ph" class="ph"></div>
+</section>
+</main>
+<footer>&copy; 2026 Adnan Shah Somrat, Brahmanbaria Government Polytechnic Institute</footer>
+
+<script>
+/* ===== Edit your own details here ===== */
+const CFG={
+ github:"https://github.com/somratofficial1600-pixel",
+ email:"somratofficial1600@gmail.com",
+ facebook:"https://www.facebook.com/rishad.samrat",
+ quiz:"https://somratofficial1600-pixel.github.io/About_Somrat/"
+};
+const NOTES=[ /* s = semester (1-8), t = title, u = link. Example: {s:1,t:"Physics notes",u:"https://..."}, */
+];
+/* ====================================== */
+const $=id=>document.getElementById(id);
+const ord=n=>n+(["th","st","nd","rd"][(n%100>10&&n%100<14)?0:Math.min(n%10,4)%4]||"th");
+
+/* Links */
+[["GitHub",CFG.github],["Facebook",CFG.facebook],["Email",CFG.email&&"mailto:"+CFG.email],["Quiz website",CFG.quiz]].forEach(([n,u])=>{
+ if(!u)return;const a=document.createElement("a");a.href=u;a.textContent=n;
+ if(u.startsWith("http")){a.target="_blank";a.rel="noopener"}$("links").appendChild(a)});
+
+/* Terminal */
+const out=$("out"),inp=$("cmd");
+const say=(t,c)=>{const d=document.createElement("div");d.textContent=t;if(c)d.className=c;out.appendChild(d);out.scrollTop=out.scrollHeight};
+const link=(n,v)=>n+": "+(v||"not added yet");
+const CMDS={
+ help:()=>["Commands: about, skills, projects, contact, clear"],
+ about:()=>["Name: Adnan Shah Somrat","Studying: Diploma in Computer Science and Technology, 1st semester","Institute: Brahmanbaria Government Polytechnic Institute","Earlier: SSC from Rajapur High School"],
+ skills:()=>["Learning now: HTML, CSS, JavaScript, Git and GitHub"],
+ projects:()=>["1. This website: portfolio, notes hub, CGPA calculator and roadmap","2. Quiz website: "+CFG.quiz],
+ contact:()=>[link("GitHub",CFG.github),link("Email",CFG.email),link("Facebook",CFG.facebook)]
+};
+function run(raw){
+ const c=raw.trim().toLowerCase();if(!c)return;
+ say("$ "+c,"cmd");
+ if(c==="clear"){out.textContent="";return}
+ if(CMDS[c])CMDS[c]().forEach(l=>say(l));
+ else say("Command not found. Type help to see what is available.","err");
+}
+$("tf").addEventListener("submit",e=>{e.preventDefault();run(inp.value);inp.value=""});
+["help","about","skills","projects","contact","clear"].forEach(c=>{
+ const b=document.createElement("button");b.type="button";b.textContent=c;b.onclick=()=>run(c);$("quick").appendChild(b)});
+say("Welcome! I am Somrat. Tap a button below or type a command.");
+
+/* Notes */
+let sem=0;
+function drawNotes(){
+ const q=$("q").value.trim().toLowerCase(),L=$("list");L.textContent="";
+ const r=NOTES.filter(n=>(!sem||n.s===sem)&&n.t.toLowerCase().includes(q));
+ if(!r.length){const d=document.createElement("div");d.className="empty";d.textContent="No notes yet. New notes will be added here soon.";L.appendChild(d);return}
+ r.forEach(n=>{const a=document.createElement("a");a.href=n.u;a.innerHTML="<span></span><small></small>";
+  a.children[0].textContent=n.t;a.children[1].textContent=ord(n.s)+" semester";L.appendChild(a)});
+}
+for(let i=0;i<=8;i++){const b=document.createElement("button");b.type="button";b.className="chip"+(i?"":" on");
+ b.textContent=i?ord(i):"All";b.onclick=()=>{sem=i;document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));b.classList.add("on");drawNotes()};$("chips").appendChild(b)}
+$("q").addEventListener("input",drawNotes);drawNotes();
+
+/* CGPA */
+const G=[["A+",4],["A",3.75],["A-",3.5],["B+",3.25],["B",3],["B-",2.75],["C+",2.5],["C",2.25],["D",2],["F",0]];
+function addRow(){
+ const d=document.createElement("div");d.className="f";
+ d.innerHTML='<input type="text" placeholder="Subject name" aria-label="Subject name"><input type="number" min="0" step="0.5" value="3" aria-label="Credit"><select aria-label="Grade">'+G.map(g=>"<option value="+g[1]+">"+g[0]+" ("+g[1].toFixed(2)+")</option>").join("")+'</select><button class="x" type="button" aria-label="Remove subject">&times;</button>';
+ d.querySelector(".x").onclick=()=>{d.remove();calc()};
+ d.addEventListener("input",calc);$("rows").appendChild(d);calc();
+}
+function calc(){
+ let tc=0,tp=0;
+ document.querySelectorAll("#rows .f").forEach(r=>{
+  const c=parseFloat(r.children[1].value)||0,g=parseFloat(r.children[2].value)||0;tc+=c;tp+=c*g});
+ $("tc").textContent=tc;$("cg").textContent=tc?(tp/tc).toFixed(2):"0.00";
+}
+$("add").onclick=addRow;for(let i=0;i<4;i++)addRow();
+
+/* Roadmap */
+const PH=[
+ ["Phase 1: Foundations",["Computer basics and typing","HTML","CSS","Git and GitHub"]],
+ ["Phase 2: Building logic",["JavaScript basics","C programming","Intro to data structures","First mini project"]],
+ ["Phase 3: Widening out",["Python","SQL and databases","Linux commands","Networking basics"]],
+ ["Phase 4: Real-world work",["React or Node.js","One big project","Portfolio update","Internship preparation"]]
+];
+let saved={};try{saved=JSON.parse(localStorage.getItem("rm")||"{}")}catch(e){}
+function prog(){
+ const all=document.querySelectorAll("#ph input"),n=[...all].filter(x=>x.checked).length,p=Math.round(n*100/all.length);
+ $("pct").textContent=p+"%";$("fill").style.width=p+"%";
+}
+PH.forEach((p,pi)=>{
+ const h=document.createElement("h3");h.textContent=p[0];$("ph").appendChild(h);
+ p[1].forEach((t,ti)=>{
+  const k=pi+"-"+ti,l=document.createElement("label"),c=document.createElement("input"),s=document.createElement("span");
+  c.type="checkbox";c.checked=!!saved[k];s.textContent=t;l.className=c.checked?"done":"";
+  c.onchange=()=>{l.className=c.checked?"done":"";saved[k]=c.checked;
+   try{localStorage.setItem("rm",JSON.stringify(saved))}catch(e){}prog()};
+  l.append(c,s);$("ph").appendChild(l)});
+});
+prog();
+
+/* Highlight current section in nav */
+const links=[...document.querySelectorAll("#nav a")];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section").forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
